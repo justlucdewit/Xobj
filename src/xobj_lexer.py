@@ -22,5 +22,12 @@ def lexical_analyzer(path):
         elif char in digits:
             tokens.append(Token("digit", char))
 
-    for t in tokens:
+    
+    #combine neighbouring tokens with the same type
+    newtokens = []
+    for i in range(len(tokens)-1):
+        if tokens[i].tokenType == "digit" and tokens[i+1].tokenType == "digit":
+            newtokens.append(Token("digit", tokens[i].tokenValue + tokens[i+1].tokenValue))
+
+    for t in newtokens:
         t.show()
